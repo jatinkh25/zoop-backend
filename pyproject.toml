@@ -1,13 +1,14 @@
 [project]
-name = "uv-practice"
+name = "zoop-backend"
 version = "0.1.0"
-description = "Add your description here"
+description = "Zoop backend project repo"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi[standard]>=0.115.8",
     "psycopg[binary]>=3.2.4",
     "pydantic-settings>=2.7.1",
+    "pyjwt>=2.10.1",
     "sentry-sdk>=2.20.0",
     "sqlalchemy>=2.0.38",
 ]

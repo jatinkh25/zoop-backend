@@ -36,6 +36,8 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str, BeforeValidator(parse_cors)
     ] = []
+    SUPABASE_JWT_SECRET: str
+    SUPABASE_JWT_ALGORITHM: str
 
     @computed_field
     @property
@@ -70,4 +72,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-print("settings", settings.SQLALCHEMY_DATABASE_URI)
