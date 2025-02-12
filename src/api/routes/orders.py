@@ -8,8 +8,8 @@ from src.db.base import get_db
 router = APIRouter()
 
 @router.get("/", response_model=List[Order])
-def get_orders(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return OrderService.get_orders(db, skip, limit)
+def get_orders(page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    return OrderService.get_orders(db, page_no, limit)
 
 @router.post("/", response_model=Order)
 def create_order(order: OrderCreate, db: Session = Depends(get_db)):

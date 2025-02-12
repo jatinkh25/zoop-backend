@@ -5,8 +5,9 @@ from src.schemas.order import OrderCreate, OrderUpdate
 
 class OrderService:
     @staticmethod
-    def get_orders(db: Session, skip: int = 0, limit: int = 100):
-        return db.query(Order).offset(skip).limit(limit).all()
+    def get_orders(db: Session, page_no: int = 0, limit: int = 100):
+        offset = page_no * limit
+        return db.query(Order).offset(offset).limit(limit).all()
 
     @staticmethod
     def get_order(db: Session, order_id: int):

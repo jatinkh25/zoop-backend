@@ -5,8 +5,9 @@ from src.schemas.menu_item import MenuItemCreate, MenuItemUpdate
 
 class MenuItemService:
     @staticmethod
-    def get_menu_items(db: Session, skip: int = 0, limit: int = 100):
-        return db.query(MenuItem).offset(skip).limit(limit).all()
+    def get_menu_items(db: Session, page_no: int = 0, limit: int = 100):
+        offset = page_no * limit
+        return db.query(MenuItem).offset(offset).limit(limit).all()
 
     @staticmethod
     def get_menu_item(db: Session, menu_item_id: int):

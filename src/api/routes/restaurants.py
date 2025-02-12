@@ -7,11 +7,11 @@ from src.db.base import get_db
 
 router = APIRouter()
 
-@router.get("/", response_model=List[Restaurant])
-def get_restaurants(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return RestaurantService.get_restaurants(db, skip, limit)
+@router.get("", response_model=List[Restaurant])
+def get_restaurants(page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    return RestaurantService.get_restaurants(db, page_no, limit)
 
-@router.post("/", response_model=Restaurant)
+@router.post("", response_model=Restaurant)
 def create_restaurant(restaurant: RestaurantCreate, db: Session = Depends(get_db)):
     return RestaurantService.create_restaurant(db, restaurant)
 

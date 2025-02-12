@@ -5,8 +5,9 @@ from src.schemas.payment import PaymentCreate, PaymentUpdate
 
 class PaymentService:
     @staticmethod
-    def get_payments(db: Session, skip: int = 0, limit: int = 100):
-        return db.query(Payment).offset(skip).limit(limit).all()
+    def get_payments(db: Session, page_no: int = 0, limit: int = 100):
+        offset = page_no * limit
+        return db.query(Payment).offset(offset).limit(limit).all()
 
     @staticmethod
     def get_payment(db: Session, payment_id: int):

@@ -1,16 +1,24 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from fastapi import HTTPException
 from src.models.restaurant import Restaurant
 from src.schemas.restaurant import RestaurantCreate, RestaurantUpdate
 
 class RestaurantService:
     @staticmethod
-    def get_restaurants(db: Session, skip: int = 0, limit: int = 100):
-        return db.query(Restaurant).offset(skip).limit(limit).all()
+    def get_restaurants(db: Session, page_no: int = 0, limit: int = 100):
+        offset = page_no * limit
+        return db.query(Restaurant)\
+                 .options(joinedload(Restaurant.top_menu_items))\
+                 .offset(offset)\
+                 .limit(limit)\
+                 .all()
 
     @staticmethod
     def get_restaurant(db: Session, restaurant_id: int):
-        restaurant = db.query(Restaurant).filter(Restaurant.id == restaurant_id).first()
+        restaurant = db.query(Restaurant)\
+                       .options(joinedload(Restaurant.top_menu_items))\
+                       .filter(Restaurant.id == restaurant_id)\
+                       .first()
         if not restaurant:
             raise HTTPException(status_code=404, detail="Restaurant not found")
         return restaurant

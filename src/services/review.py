@@ -5,8 +5,9 @@ from src.schemas.review import ReviewCreate, ReviewUpdate
 
 class ReviewService:
     @staticmethod
-    def get_reviews(db: Session, skip: int = 0, limit: int = 100):
-        return db.query(Review).offset(skip).limit(limit).all()
+    def get_reviews(db: Session, page_no: int = 0, limit: int = 100):
+        offset = page_no * limit
+        return db.query(Review).offset(offset).limit(limit).all()
 
     @staticmethod
     def get_review(db: Session, review_id: int):
