@@ -7,11 +7,11 @@ from src.db.base import get_db
 
 router = APIRouter()
 
-@router.get("/", response_model=List[OrderItem])
+@router.get("", response_model=List[OrderItem])
 def get_order_items(page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return OrderItemService.get_order_items(db, page_no, limit)
 
-@router.post("/", response_model=OrderItem)
+@router.post("", response_model=OrderItem)
 def create_order_item(order_item: OrderItemCreate, db: Session = Depends(get_db)):
     return OrderItemService.create_order_item(db, order_item)
 

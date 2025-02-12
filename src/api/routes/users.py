@@ -7,11 +7,11 @@ from src.db.base import get_db
 
 router = APIRouter()
 
-@router.get("/", response_model=List[User])
+@router.get("", response_model=List[User])
 def get_users(page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return UserService.get_users(db, page_no, limit)
 
-@router.post("/", response_model=User)
+@router.post("", response_model=User)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     return UserService.create_user(db, user)
 

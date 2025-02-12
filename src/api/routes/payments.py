@@ -7,11 +7,11 @@ from src.db.base import get_db
 
 router = APIRouter()
 
-@router.get("/", response_model=List[Payment])
+@router.get("", response_model=List[Payment])
 def get_payments(page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return PaymentService.get_payments(db, page_no, limit)
 
-@router.post("/", response_model=Payment)
+@router.post("", response_model=Payment)
 def create_payment(payment: PaymentCreate, db: Session = Depends(get_db)):
     return PaymentService.create_payment(db, payment)
 
