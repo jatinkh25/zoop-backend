@@ -5,9 +5,15 @@ from src.schemas.menu_item import MenuItemCreate, MenuItemUpdate
 
 class MenuItemService:
     @staticmethod
-    def get_menu_items(db: Session, page_no: int = 0, limit: int = 100):
+    def get_menu_items(db: Session, restaurant_id: int, page_no: int = 0, limit: int = 100):
         offset = page_no * limit
-        return db.query(MenuItem).offset(offset).limit(limit).all()
+        return (
+            db.query(MenuItem)
+            .filter(MenuItem.restaurant_id == restaurant_id)
+            .offset(offset)
+            .limit(limit)
+            .all()
+        )
 
     @staticmethod
     def get_menu_item(db: Session, menu_item_id: int):

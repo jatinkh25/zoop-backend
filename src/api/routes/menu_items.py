@@ -8,8 +8,8 @@ from src.db.base import get_db
 router = APIRouter()
 
 @router.get("", response_model=List[MenuItem])
-def get_menu_items(page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return MenuItemService.get_menu_items(db, page_no, limit)
+def get_menu_items(restaurant_id: int, page_no: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    return MenuItemService.get_menu_items(db, restaurant_id, page_no, limit)
 
 @router.post("", response_model=MenuItem)
 def create_menu_item(menu_item: MenuItemCreate, db: Session = Depends(get_db)):
